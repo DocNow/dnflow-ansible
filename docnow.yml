@@ -1,0 +1,12 @@
+---
+- hosts: docnow
+
+  pre_tasks:
+    - name: update apt_cache
+      apt: update_cache=yes cache_valid_time=6000
+
+  tasks:
+    - include: docnow/python_build.yml
+    - include: docnow/other_software.yml
+    - include: docnow/user_setup.yml
+    - include: docnow/virtenv_setup.yml
