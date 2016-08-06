@@ -1,0 +1,9 @@
+---
+- hosts: redis
+
+  pre_tasks:
+    - name: update apt_cache
+      apt: update_cache=yes cache_valid_time=6000
+
+  tasks:
+    - include: redis/redis_software.yml
