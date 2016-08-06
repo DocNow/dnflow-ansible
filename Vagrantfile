@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     docnow.vm.hostname = "docnow-app1.dev"
     docnow.vm.network :private_network, ip: "192.168.60.14"
     docnow.vm.provision "ansible_local" do |ansible|
-        ansible.playbook = "site.yml"
+        ansible.playbook = "docnow.yml"
         ansible.sudo = true
     end
   end
