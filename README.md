@@ -57,4 +57,4 @@ Current maintainers:
 
 ## License
 
-[MIT](https://opensource.org/licenses/ISC)
+[ISC](https://opensource.org/licenses/ISC)
