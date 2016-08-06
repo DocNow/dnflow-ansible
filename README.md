@@ -42,3 +42,19 @@ Before deploying the environment you must make a few changes. Specifically you w
 ```bash
 cp files/example_twarc_config files/twarc_config
 ```
+
+Boxes take approximately _10 mins_ to come up, and it can take much longer locally depending on your internet connection.
+
+### Provider: Virtualbox
+
+```bash
+$ vagrant up
+```
+
+Current maintainers:
+
+* [Francis Kayiwa](https://github.com/kayiwa)
+
+## License
+
+[MIT](https://opensource.org/licenses/ISC)
