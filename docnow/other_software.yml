@@ -27,4 +27,5 @@
     - pkg-config
     - software-properties-common
     - ca-certificates
+    - sqlite3
     
