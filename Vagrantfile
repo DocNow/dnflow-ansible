@@ -20,14 +20,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         ansible.sudo = true
     end
   end
-
-# redis server
-  config.vm.define "redis" do | redis |
-    redis.vm.hostname = "redis-app1.dev"
-    redis.vm.network :private_network, ip: "192.168.60.15"
-    redis.vm.provision "ansible_local" do |ansible|
-        ansible.playbook = "redis.yml"
-        ansible.sudo = true
-    end
-  end
 end
