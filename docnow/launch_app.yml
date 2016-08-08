@@ -1,0 +1,8 @@
+---
+  - name: start the rq worker
+    become_user: docnow
+    command: rq worker
+
+  - name: db to track searches
+    become_user: docnow
+    command: sqlite3 db.splite3 < schema.sql chdir=/home/docnow/dnflow
