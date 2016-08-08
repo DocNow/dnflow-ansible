@@ -1,8 +1,15 @@
 ---
+  - name: copy rq startup script
+    copy: src=./docnow/files/rqworker.sh dest=/home/docnow/rqworker.sh mode="a+x" 
+
   - name: start the rq worker
     become_user: docnow
-    command: rq worker
+    command: "nohup /home/docnow/rqworker.sh" 
+    args:
+      chdir: /home/docnow
 
   - name: db to track searches
     become_user: docnow
-    command: sqlite3 db.splite3 < schema.sql chdir=/home/docnow/dnflow
+    shell: sqlite3 db.splite3 < schema.sql 
+    args:
+      chdir: /home/docnow/dnflow
