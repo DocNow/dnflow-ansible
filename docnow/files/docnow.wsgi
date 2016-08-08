@@ -2,6 +2,6 @@
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0,"/home/docnow/")
+sys.path.insert(0,"/home/docnow/dnflow/")
 
-from dnflow import app as application
+from ui import app as application
