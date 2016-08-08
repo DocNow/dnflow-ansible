@@ -1,0 +1,26 @@
+---
+  - name: install mod_wsgi
+    apt: name={{ item }} state=present update_cache=yes
+    with_items:
+      - libapache2-mod-wsgi
+      - apache2
+
+  - name: apache enable mod_wsgi
+    apache2_module: state=present name=wsgi
+
+  - name: copy wsgi file
+    copy: src=./docnow/files/docnow.wsgi dest=/home/docnow/dnflow/docnow.wsgi owner=docnow group=docnow
+
+  - name: copy apache site config
+    template: src=./docnow/templates/docnow.conf dest=/etc/apache2/sites-available/docnow.conf
+
+  - name: remove apache default virtual host
+    file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+
+  - name: enable docnow
+    command: a2ensite docnow
+    args:
+      creates: /etc/apache2/sites-enabled/docnow.conf
+
+  - name: restart apache
+    service: name=apache2 state=restarted 
