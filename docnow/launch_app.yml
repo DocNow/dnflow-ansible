@@ -1,7 +1,16 @@
 ---
+  - name: create configuration file
+    become_user: docnow
+    copy: remote_src=True src=/home/docnow/dnflow/dnflow.cfg.template dest=/home/docnow/dnflow/dnflow.cfg
+
+  - name: copy luigid daemonize script
+    copy: src=./docnow/files/luigid.sh dest=/home/docnow/luigid.sh mode="a+x"
+
   - name: launch luigid
     become_user: docnow
-    command: luigid
+    command: "nohup /home/docnow/luigid.sh"
+    args:
+      chdir: /home/docnow
 
   - name: copy rq startup script
     copy: src=./docnow/files/rqworker.sh dest=/home/docnow/rqworker.sh mode="a+x" 
@@ -17,3 +26,12 @@
     shell: sqlite3 db.splite3 < schema.sql 
     args:
       chdir: /home/docnow/dnflow
+
+  - name: copy flask application
+    copy: src=./docnow/files/flask.sh dest=/home/docnow/flask.sh mode="a+x"
+
+  - name: start flask application
+    become_user: docnow
+    command: "nohup /home/docnow/flask.sh"
+    args:
+      chdir: /home/docnow
