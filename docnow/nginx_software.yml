@@ -11,7 +11,7 @@
     copy: src=./docnow/templates/docnow dest=/etc/nginx/sites-available/docnow
 
   - name: enable docnow
-    file: path=/etc/nginx/sites-available/docnow dest=/etc/nginx/sites-enabled/docnow state=link
+    file: src=/etc/nginx/sites-available/docnow dest=/etc/nginx/sites-enabled/docnow state=link
 
   - name: restart nginx
     service: name=nginx state=restarted 
