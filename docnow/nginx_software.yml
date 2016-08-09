@@ -1,0 +1,17 @@
+---
+  - name: install mod_wsgi
+    apt: name={{ item }} state=present update_cache=yes
+    with_items:
+      - nginx
+
+  - name: remove apache default virtual host
+    file: path=/etc/nginx/sites-enabled/default state=absent
+
+  - name: copy nginx virtualhost
+    copy: src=./docnow/templates/docnow dest=/etc/nginx/sites-available/docnow
+
+  - name: enable docnow
+    file: path=/etc/nginx/sites-available/docnow dest=/etc/nginx/sites-enabled/docnow state=link
+
+  - name: restart nginx
+    service: name=nginx state=restarted 
