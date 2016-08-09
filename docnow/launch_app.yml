@@ -1,4 +1,8 @@
 ---
+  - name: launch luigid
+    become_user: docnow
+    command: luigid
+
   - name: copy rq startup script
     copy: src=./docnow/files/rqworker.sh dest=/home/docnow/rqworker.sh mode="a+x" 
 
