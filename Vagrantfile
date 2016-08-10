@@ -18,6 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     docnow.vm.provision "ansible_local" do |ansible|
         ansible.playbook = "docnow.yml"
         ansible.sudo = true
+        ansible.verbose = ""
     end
   end
 end
