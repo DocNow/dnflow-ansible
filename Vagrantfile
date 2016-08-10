@@ -4,25 +4,25 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-# General Vagrant VM
-  config.vm.box = "ubuntu/trusty64"
-  config.ssh.insert_key = false
-  config.vm.provider :virtualbox do | v |
-    v.memory = 2048
+# Ansible provisioner default settings
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = "docnow.yml"
+    ansible.sudo = true
+    ansible.verbose = ""
   end
 
 # docnow server
-  config.vm.define "docnow" do | docnow |
-    docnow.vm.hostname = "docnow-app1.dev"
-    docnow.vm.network :private_network, ip: "192.168.60.14"
-    docnow.vm.provision "ansible_local" do |ansible|
-        ansible.playbook = "docnow.yml"
-        ansible.sudo = true
-        ansible.verbose = ""
+  config.vm.define "docnowvm" do | docnowvm |
+    docnow.vm.hostname = "docnowappvm"
+
+    docnow.vm.provider :virtualbox do |vb, override|
+      override.vm.box = "ubuntu/trusty64"
+      override.vm.network :private_network, ip: "192.168.60.14"
+      # customize memory amount on VM
+      vb.memory = "2048"
     end
-  end
   
-  docnowvm.vm.provider :aws do |aws, override|
+    docnowvm.vm.provider :aws do |aws, override|
       keypair = "#{ENV['KEYPAIR_NAME']}"
       keypair_filename = "#{ENV['KEYPAIR_FILE']}"
       override.vm.box = "aws_dummy"
@@ -41,5 +41,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       aws.tags = {
         'Name' => "Docnow #{keypair}"
       }
+    end
   end
 end
