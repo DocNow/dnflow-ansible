@@ -1,10 +1,13 @@
 ---
-  - name: install mod_wsgi
+  - name: install nginx
     apt: name={{ item }} state=present update_cache=yes
     with_items:
       - nginx
 
-  - name: remove apache default virtual host
+  - name: install uwsgi
+    pip: name=uwsgi virtualenv=/opt/docnow
+
+  - name: remove nginx default virtual host
     file: path=/etc/nginx/sites-enabled/default state=absent
 
   - name: copy nginx virtualhost
