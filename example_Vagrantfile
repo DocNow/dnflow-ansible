@@ -12,7 +12,7 @@
 Vagrant.configure(2) do |config|
 
   # Ansible provisioner default settings
-  config.vm.provision :ansible do |ansible|
+  config.vm.provision :ansible_local do |ansible|
     ansible.playbook = "docnow.yml"
     ansible.sudo = true
     ansible.verbose = ""
