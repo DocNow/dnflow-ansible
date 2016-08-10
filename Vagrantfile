@@ -1,28 +1,35 @@
 #-*- mode: ruby -*-
 # vi: set ft=ruby :
 
-VAGRANTFILE_API_VERSION = "2"
+# To install under AWS you need to have the vagrant-aws provider plugin installed.
+# You can install this using the following command:
+#
+#   vagrant plugin install vagrant-aws
+#
+# If no "--provider" is specified during "vagrant up" then the default
+# (VirtualBox) provider will be used.
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-# Ansible provisioner default settings
+Vagrant.configure(2) do |config|
+
+  # Ansible provisioner default settings
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "docnow.yml"
     ansible.sudo = true
     ansible.verbose = ""
   end
 
-# docnow server
-  config.vm.define "docnowvm" do | docnowvm |
-    docnow.vm.hostname = "docnowappvm"
+  # dnflow server
+  config.vm.define :dnflowvm do |dnflowvm|
+    dnflowvm.vm.hostname = "dnflowvm"
 
-    docnow.vm.provider :virtualbox do |vb, override|
+    dnflowvm.vm.provider :virtualbox do |vb, override|
       override.vm.box = "ubuntu/trusty64"
-      override.vm.network :private_network, ip: "192.168.60.14"
-      # customize memory amount on VM
+      override.vm.network :private_network, ip: "192.168.60.24"
+      # Customize the amount of memory on the VM:
       vb.memory = "2048"
     end
-  
-    docnowvm.vm.provider :aws do |aws, override|
+
+    dnflowvm.vm.provider :aws do |aws, override|
       keypair = "#{ENV['KEYPAIR_NAME']}"
       keypair_filename = "#{ENV['KEYPAIR_FILE']}"
       override.vm.box = "aws_dummy"
@@ -34,12 +41,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       aws.ami = "ami-df0607b5" # Ubuntu Trusty LTS
       aws.region = "us-east-1"
       aws.instance_type = "t2.small"
-      aws.security_groups = ["default_vpc_web_vt_ssh"]
       #aws.associate_public_ip = true
       override.ssh.username = "ubuntu"
       override.ssh.private_key_path = "#{keypair_filename}"
       aws.tags = {
-        'Name' => "Docnow #{keypair}"
+        'Name' => "dnflow #{keypair}"
       }
     end
   end
