@@ -1,2 +1,2 @@
 #!/bin/bash
-/opt/docnow/bin/rqworker &
+/opt/docnow/bin/rq worker &
