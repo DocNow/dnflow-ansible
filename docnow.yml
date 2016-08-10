@@ -11,5 +11,5 @@
     - include: docnow/user_setup.yml
     - include: docnow/virtenv_setup.yml
     - include: docnow/redis_software.yml
-    - include: docnow/launch_app.yml
     - include: docnow/nginx_software.yml
+    - include: docnow/launch_app.yml
