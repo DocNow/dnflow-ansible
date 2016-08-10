@@ -6,6 +6,15 @@
     become_user: docnow
     copy: remote_src=True src=/home/docnow/dnflow/dnflow.cfg.template dest=/home/docnow/dnflow/dnflow.cfg
 
+  - name: add twitter consumer key
+    replace: dest=/home/docnow/dnflow/dnflow.cfg regexp='YOUR_TWITTER_CONSUMER_KEY_HERE' replace={{ twitter_consumer_key }}
+
+  - name: add twitter consumer secret
+    replace: dest=/home/docnow/dnflow/dnflow.cfg regexp='YOUR_TWITTER_CONSUMER_SECRET_HERE' replace={{ twitter_consumer_secret }}
+
+  - name: add hostname 
+    replace: dest=/home/docnow/dnflow/dnflow.cfg regexp="HOSTNAME = 'localhost'" replace="HOSTNAME = '{{ hostname }}'"
+
   - name: copy luigid daemonize script
     copy: src=./docnow/files/luigid.sh dest=/home/docnow/luigid.sh mode="a+x"
 
@@ -30,14 +39,14 @@
   - name: copy upstart script
     copy: src=./docnow/templates/docnow.conf dest=/etc/init/docnow.conf
 
-  - name: start application
-    service: name=docnow state=started
-
   - name: db to track searches
     become_user: docnow
-    shell: sqlite3 db.splite3 < schema.sql
+    shell: sqlite3 db.sqlite3 < schema.sql
     args:
       chdir: /home/docnow/dnflow
+
+  - name: start application
+    service: name=docnow state=started
 
   - name: restart webserver
     service: name=nginx state=restarted

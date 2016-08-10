@@ -1,4 +1,3 @@
 .vagrant
 .DS_Store
-twarc_config
-Vagrantfile
+group_vars/all
