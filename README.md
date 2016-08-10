@@ -40,7 +40,7 @@ cd docnow-ansible
 Before deploying the environment you must make a few changes. Specifically you will need to register an application at [apps.twitter.com](https://apps.twitter.com). Once you've created your application, note down the consumer key, consumer secret and then click to generate an access token and access token secret. With these four variables in hand you can modify the `files/example_twarc_config` in a copy with the same format by doing
 
 ```bash
-cp files/example_twarc_config files/twarc_config
+cp docnow/files/example_twarc_config docnow/files/twarc_config
 ```
 
 Boxes take approximately _10 mins_ to come up, and it can take much longer locally depending on your internet connection.
