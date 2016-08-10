@@ -15,6 +15,3 @@
 
   - name: source the profile
     copy: src=./docnow/files/bashrc.j2 dest=/home/docnow/.bashrc
-
-  - name: copy twarc config
-    copy: src=./docnow/files/twarc_config dest=/home/docnow/.twarc owner=docnow group=docnow
