@@ -7,6 +7,14 @@ server {
     uwsgi_pass unix:/home/docnow/dnflow/docnow.sock;
   }
   location /static {
-    alias /home/docnow/dnflow/statis;
+    alias /home/docnow/dnflow/static;
+  }
+}
+
+server {
+  listen 8080 default_server;
+  listen [::]:8080 default_server ipv6only=on;
+  location / {
+    proxy_pass http://localhost:8082;
   }
 }
