@@ -24,12 +24,6 @@
     args:
       chdir: /home/docnow
 
-  - name: db to track searches
-    become_user: docnow
-    shell: sqlite3 db.splite3 < schema.sql 
-    args:
-      chdir: /home/docnow/dnflow
-
   - name: copy application ini file
     copy: src=./docnow/files/docnow.ini dest=/home/docnow/dnflow/docnow.ini owner=docnow group=docnow
 
@@ -38,6 +32,12 @@
 
   - name: start application
     service: name=docnow state=started
+
+  - name: db to track searches
+    become_user: docnow
+    shell: sqlite3 db.splite3 < schema.sql
+    args:
+      chdir: /home/docnow/dnflow
 
   - name: restart webserver
     service: name=nginx state=restarted
