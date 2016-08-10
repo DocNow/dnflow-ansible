@@ -1,4 +1,7 @@
 ---
+  - name: create a directory for logging uwsgi
+    file: path=/var/log/uwsgi state=directory owner=docnow group=www-data
+
   - name: create configuration file
     become_user: docnow
     copy: remote_src=True src=/home/docnow/dnflow/dnflow.cfg.template dest=/home/docnow/dnflow/dnflow.cfg
