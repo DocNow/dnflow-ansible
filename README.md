@@ -5,12 +5,13 @@ Ansible playbooks for setting up dnflow
 
 ## Introduction
 
-This is a development environment for docnow's dnflow
+These scripts are intended to be run on a Unix-like system. They are tested to work on Mac OSX.
 
-Vagrant is used for launching the environment, and we will support these providers
+To use these scripts, [Vagrant](https://vagrantup.com) must already have been installed on the local system with the [VirtualBox](https://virtualbox.org) provider working. For provisioning to AWS, the `aws` provider must also be installed. This can be done by executing the following command, which will install the aws Vagrant provider plugin: 
 
-1. Virtualbox
-2. AWS
+```bash
+vagrant plugin install vagrant-aws
+```
 
 For each of these providers only Ubuntu 14.04 is supported. We will also provide Docker as an additional provider.
 
@@ -18,12 +19,6 @@ For each of these providers only Ubuntu 14.04 is supported. We will also provide
 
 - Ubuntu 14.04
 - Python3
-
-## Requirements
-
-1. [Vagrant](http://www.vagrantup.com/)
-2. [Virtualbox](https://www.virtualbox.org/)
-3. [git](https://git-scm.com/)
 
 ## Setup
 
@@ -43,6 +38,12 @@ Before deploying the environment you must make a few changes. Specifically you w
 cp docnow/files/example_twarc_config docnow/files/twarc_config
 ```
 
+For all environments, we have an `example_Vagrantfile` which will work. The Vagrantfile will be ignored because when using `aws` sensitive information will be added. Copying the `example_Vagrantfile` to `Vagrantfile` will need to be performed by:
+
+```bash
+cp example_Vagrantfile Vagrantfile
+```
+
 Boxes take approximately _10 mins_ to come up, and it can take much longer locally depending on your internet connection.
 
 ### Provider: Virtualbox
@@ -50,6 +51,17 @@ Boxes take approximately _10 mins_ to come up, and it can take much longer local
 ```bash
 $ vagrant up
 ```
+
+### Provider AWS
+
+When using the `aws` provider to `vagrant up` it is necessary to define several environment variables in order to authenticate to AWS and supply a keypair with which Vagrant can log in to the new AWS EC2 instance being deployed. These environment variables are as follows:
+
+* `KEYPAIR_NAME`: the name of the AWS keypair that will be used to log in to the instance. This keypair should already exist within your AWS account and its private key file should reside on the local system.
+* `KEYPAIR_FILE`: the pathname of the private key on the local system corresponding to the aforementioned keypair.
+* `AWS_ACCESS_KEY`: the AWS IAM access key to the account under which the EC2 instance will be created.
+* `AWS_SECRET_KEY`: the AWS IAM secret key to the account under which the EC2 instance will be created.
+
+Please check these are appropriate before bringing up the instance with Vagrant and edit where necessary beforehand.
 
 Current maintainers:
 
