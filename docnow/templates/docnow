@@ -6,4 +6,7 @@ server {
     include uwsgi_params;
     uwsgi_pass unix:/home/docnow/dnflow/docnow.sock;
   }
+  location /static {
+    alias /home/docnow/dnflow/statis;
+  }
 }
