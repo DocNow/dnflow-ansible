@@ -3,7 +3,7 @@
 [redis]
 192.168.60.15
 [multi:children]
-docnow
+dnflow
 redis
 [multi:vars]
 ansible_ssh_user=vagrant

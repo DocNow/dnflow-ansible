@@ -1,5 +1,5 @@
 ---
-- hosts: docnow
+- hosts: dnflow
 
   pre_tasks:
     - name: update apt_cache
