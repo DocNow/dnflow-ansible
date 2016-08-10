@@ -27,11 +27,14 @@
     args:
       chdir: /home/docnow/dnflow
 
-  - name: copy flask application
-    copy: src=./docnow/files/flask.sh dest=/home/docnow/flask.sh mode="a+x"
+  - name: copy application ini file
+    copy: src=./docnow/files/docnow.ini dest=/home/docnow/docnow.ini owner=docnow group=docnow
 
-  - name: start flask application
-    become_user: docnow
-    command: "nohup /home/docnow/flask.sh"
-    args:
-      chdir: /home/docnow
+  - name: copy upstart script
+    copy: src=./docnow/templates/docnow.conf dest=/etc/init/docnow.conf
+
+  - name: start application
+    service: name=docnow state=started
+
+  - name: restart webserver
+    service: name=nginx state=restarted
