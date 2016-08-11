@@ -4,7 +4,7 @@ server {
   server_name 192.168.60.14;
   location / {
     include uwsgi_params;
-    uwsgi_pass unix:/home/docnow/dnflow/docnow.sock;
+    uwsgi_pass 127.0.0.1:8001;
   }
   location /static {
     alias /home/docnow/dnflow/static;
@@ -18,3 +18,4 @@ server {
     proxy_pass http://localhost:8082;
   }
 }
+

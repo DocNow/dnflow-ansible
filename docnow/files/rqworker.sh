@@ -1,2 +1,6 @@
 #!/bin/bash
-/opt/docnow/bin/rq worker &
+
+source /opt/docnow/bin/activate
+cd /home/docnow/dnflow/
+
+rq worker &

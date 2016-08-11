@@ -11,7 +11,7 @@
 
   - name: create virtualenv
     become_user: docnow
-    pip: requirements=/home/docnow/dnflow/requirements.txt virtualenv=/opt/docnow virtualenv_python=python3.4
+    pip: requirements=/home/docnow/dnflow/requirements.txt virtualenv=/opt/docnow virtualenv_python=python3.5
 
   - name: source the profile
     copy: src=./docnow/files/bashrc.j2 dest=/home/docnow/.bashrc
