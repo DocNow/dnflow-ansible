@@ -1,7 +1,7 @@
 # docnow-ansible
 Ansible playbooks for setting up dnflow
 
-[![LICENSE](https://img.shields.io/badge/license-ISC-blue.svg?style=flat-square)](./LICENSE)
+[![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
 
 ## Introduction
 
@@ -69,4 +69,4 @@ Current maintainers:
 
 ## License
 
-[ISC](https://opensource.org/licenses/ISC)
+[MIT](https://opensource.org/licenses/MIT)
