@@ -1,7 +1,7 @@
 server {
   listen 80;
   listen [::]:80 default_server ipv6only=on;
-  server_name 192.168.60.14;
+  server_name {{ hostname }};
   location / {
     include uwsgi_params;
     uwsgi_pass 127.0.0.1:8001;
