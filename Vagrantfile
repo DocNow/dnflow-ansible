@@ -19,33 +19,28 @@ Vagrant.configure(2) do |config|
   end
 
   # dnflow server
-  config.vm.define :dnflowvm do |dnflowvm|
-    dnflowvm.vm.hostname = "dnflowvm"
+  config.vm.define :dnflow do |dnflow|
+    dnflow.vm.hostname = "dnflow"
 
-    dnflowvm.vm.provider :virtualbox do |vb, override|
+    dnflow.vm.provider :virtualbox do |vb, override|
       override.vm.box = "ubuntu/trusty64"
       override.vm.network :private_network, ip: "192.168.60.24"
       # Customize the amount of memory on the VM:
       vb.memory = "2048"
     end
 
-    dnflowvm.vm.provider :aws do |aws, override|
-      keypair = "#{ENV['KEYPAIR_NAME']}"
-      keypair_filename = "#{ENV['KEYPAIR_FILE']}"
+    dnflow.vm.provider :aws do |aws, override|
       override.vm.box = "aws_dummy"
       override.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
       override.vm.box_check_update = false
-      aws.access_key_id = ENV['AWS_ACCESS_KEY']
-      aws.secret_access_key = ENV['AWS_SECRET_KEY']
-      aws.keypair_name = keypair
+      aws.aws_dir = ENV['HOME'] + "/.aws/"
       aws.ami = "ami-df0607b5" # Ubuntu Trusty LTS
       aws.region = "us-east-1"
       aws.instance_type = "t2.small"
       #aws.associate_public_ip = true
       override.ssh.username = "ubuntu"
-      override.ssh.private_key_path = "#{keypair_filename}"
       aws.tags = {
-        'Name' => "dnflow #{keypair}"
+        'Name' => "dnflow }"
       }
     end
   end
