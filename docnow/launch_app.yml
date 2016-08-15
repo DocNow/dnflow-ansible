@@ -3,7 +3,6 @@
     file: path=/var/log/uwsgi state=directory owner=docnow group=www-data
 
   - name: create configuration file
-    become_user: docnow
     copy: remote_src=True src=/home/docnow/dnflow/dnflow.cfg.template dest=/home/docnow/dnflow/dnflow.cfg
 
   - name: add twitter consumer key
@@ -19,7 +18,6 @@
     copy: src=./docnow/files/luigid.sh dest=/home/docnow/luigid.sh mode="a+x"
 
   - name: launch luigid
-    become_user: docnow
     command: "nohup /home/docnow/luigid.sh"
     args:
       chdir: /home/docnow
@@ -28,7 +26,6 @@
     copy: src=./docnow/files/rqworker.sh dest=/home/docnow/rqworker.sh mode="a+x" 
 
   - name: start the rq worker
-    become_user: docnow
     command: "nohup /home/docnow/rqworker.sh" 
     args:
       chdir: /home/docnow
@@ -40,10 +37,12 @@
     copy: src=./docnow/templates/docnow.conf dest=/etc/init/docnow.conf
 
   - name: db to track searches
-    become_user: docnow
     shell: sqlite3 db.sqlite3 < schema.sql
     args:
       chdir: /home/docnow/dnflow
+
+  - name: grant ownership to docnow user
+    file: path=/home/docnow/dnflow state=directory owner=docnow group=docnow recurse=yes
 
   - name: start application
     service: name=docnow state=started
