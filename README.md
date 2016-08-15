@@ -5,7 +5,7 @@ Ansible playbooks for setting up dnflow
 
 ## Introduction
 
-These scripts are intended to be run on a Unix-like system. They are tested to work on Mac OSX.
+These scripts are intended to be run on a Unix-like system. They are tested to work on Mac OSX and Ubuntu Trusty Tahr
 
 To use these scripts, [Vagrant](https://vagrantup.com) must already have been installed on the local system with the [VirtualBox](https://virtualbox.org) provider working. For provisioning to AWS, the `aws` provider must also be installed. This can be done by executing the following command, which will install the aws Vagrant provider plugin: 
 
@@ -25,8 +25,8 @@ For each of these providers only Ubuntu 14.04 is supported. We will also provide
 Clone this repository locally
 
 ```bash
-git clone https://github.com/docnow/docnow-ansible
-cd docnow-ansible
+git clone https://github.com/docnow/dnflow-ansible
+cd dnflow-ansible
 ```
 
 
@@ -63,8 +63,6 @@ When using the `aws` provider to `vagrant up` it is necessary to define several 
 * `KEYPAIR_FILE`: the pathname of the private key on the local system corresponding to the aforementioned keypair.
 * `AWS_ACCESS_KEY`: the AWS IAM access key to the account under which the EC2 instance will be created.
 * `AWS_SECRET_KEY`: the AWS IAM secret key to the account under which the EC2 instance will be created.
-
-Please check these are appropriate before bringing up the instance with Vagrant and edit where necessary beforehand.
 
 Current maintainers:
 
