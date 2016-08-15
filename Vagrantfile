@@ -34,14 +34,15 @@ Vagrant.configure(2) do |config|
       override.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
       override.vm.box_check_update = false
       aws.aws_dir = ENV['HOME'] + "/.aws/"
-      aws.ami = "ami-df0607b5" # Ubuntu Trusty LTS
+      aws.ami = "ami-2d39803a" # Ubuntu Trusty LTS
       aws.region = "us-east-1"
       aws.instance_type = "t2.small"
-      #aws.associate_public_ip = true
-      override.ssh.username = "ubuntu"
+#      aws.associate_public_ip = true
+      aws.keypair_name = "docnow"
+      aws.monitoring = "true"
+#      override.ssh.username = "ubuntu"
       aws.tags = {
-        'Name' => "dnflow }"
-      }
+        'Name' => "dnflow" }
     end
   end
 end
