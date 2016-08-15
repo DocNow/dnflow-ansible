@@ -1,7 +1,9 @@
 ---
   - name: clone dnflow repository
-    become_user: docnow
     git: repo=https://github.com/DocNow/dnflow.git dest=/home/docnow/dnflow
+  
+  - name: grant read write permissions to docnow user
+    file: path=/home/docnow/dnflow state=directory owner=docnow group=docnow recurse=yes
 
   - name: install  virtualenv
     pip: name=virtualenv
