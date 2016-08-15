@@ -38,10 +38,13 @@ Before deploying the environment you must make a few changes. Specifically you w
 cp group_vars/all.template group_vars/all
 ```
 
-For all environments, we have an `example_Vagrantfile` which will work. The Vagrantfile will be ignored because when using `aws` sensitive information will be added. Copying the `example_Vagrantfile` to `Vagrantfile` will need to be performed by:
+For all environments, we have an `Vagrantfile` which will work. In order for this to work make sure your environment contains the following AWS variables:
 
 ```bash
-cp example_Vagrantfile Vagrantfile
+export AWS_KEY='your-key'
+export AWS_SECRET='your-secret'
+export AWS_KEYNAME='your-keyname'
+export AWS_KEYPATH='your-keypath'
 ```
 
 Boxes take approximately _10 mins_ to come up, and it can take much longer locally depending on your internet connection.
