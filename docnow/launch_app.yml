@@ -3,35 +3,35 @@
     file: path=/var/log/uwsgi state=directory owner=docnow group=www-data
 
   - name: create configuration file
-    copy: remote_src=True src=/home/docnow/dnflow/dnflow.cfg.template dest=/home/docnow/dnflow/dnflow.cfg
+    copy: remote_src=True src=/vagrant/dnflow/dnflow.cfg.template dest=/vagrant/dnflow/dnflow.cfg
 
   - name: add twitter consumer key
-    replace: dest=/home/docnow/dnflow/dnflow.cfg regexp='YOUR_TWITTER_CONSUMER_KEY_HERE' replace={{ twitter_consumer_key }}
+    replace: dest=/vagrant/dnflow/dnflow.cfg regexp='YOUR_TWITTER_CONSUMER_KEY_HERE' replace={{ twitter_consumer_key }}
 
   - name: add twitter consumer secret
-    replace: dest=/home/docnow/dnflow/dnflow.cfg regexp='YOUR_TWITTER_CONSUMER_SECRET_HERE' replace={{ twitter_consumer_secret }}
+    replace: dest=/vagrant/dnflow/dnflow.cfg regexp='YOUR_TWITTER_CONSUMER_SECRET_HERE' replace={{ twitter_consumer_secret }}
 
   - name: add hostname 
-    replace: dest=/home/docnow/dnflow/dnflow.cfg regexp="HOSTNAME = 'localhost'" replace="HOSTNAME = '{{ hostname }}'"
+    replace: dest=/vagrant/dnflow/dnflow.cfg regexp="HOSTNAME = 'localhost'" replace="HOSTNAME = '{{ hostname }}'"
 
   - name: copy luigid daemonize script
-    copy: src=./docnow/files/luigid.sh dest=/home/docnow/luigid.sh mode="a+x"
+    copy: src=./docnow/files/luigid.sh dest=/vagrant/luigid.sh mode="a+x"
 
   - name: launch luigid
-    command: "nohup /home/docnow/luigid.sh"
+    command: "nohup /vagrant/luigid.sh"
     args:
-      chdir: /home/docnow
+      chdir: /vagrant
 
   - name: copy rq startup script
-    copy: src=./docnow/files/rqworker.sh dest=/home/docnow/rqworker.sh mode="a+x" 
+    copy: src=./docnow/files/rqworker.sh dest=/vagrant/rqworker.sh mode="a+x" 
 
   - name: start the rq worker
-    command: "nohup /home/docnow/rqworker.sh" 
+    command: "nohup /vagrant/rqworker.sh" 
     args:
-      chdir: /home/docnow
+      chdir: /vagrant
 
   - name: copy application ini file
-    copy: src=./docnow/files/docnow.ini dest=/home/docnow/dnflow/docnow.ini owner=docnow group=docnow
+    copy: src=./docnow/files/docnow.ini dest=/vagrant/dnflow/docnow.ini owner=docnow group=docnow
 
   - name: copy upstart script
     copy: src=./docnow/templates/docnow.conf dest=/etc/init/docnow.conf
@@ -39,10 +39,10 @@
   - name: db to track searches
     shell: sqlite3 db.sqlite3 < schema.sql
     args:
-      chdir: /home/docnow/dnflow
+      chdir: /vagrant/dnflow
 
   - name: grant ownership to docnow user
-    file: path=/home/docnow/dnflow state=directory owner=docnow group=docnow recurse=yes
+    file: path=/vagrant/dnflow state=directory owner=docnow group=docnow recurse=yes
 
   - name: start application
     service: name=docnow state=started
