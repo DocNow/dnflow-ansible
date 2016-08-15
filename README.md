@@ -57,6 +57,17 @@ $ vagrant up
 
 ### Provider AWS
 
+Make sure you have the `vagrant-aws` plugin installed. You can check this by running the following command:
+
+```bash
+$ vagrant plugin install vagrant-aws
+```
+This will install the plugin needed to deploy to AWS with the following command:
+
+```bash
+$ vagrant up --provider aws
+```
+
 When using the `aws` provider to `vagrant up` it is necessary to define several environment variables in order to authenticate to AWS and supply a keypair with which Vagrant can log in to the new AWS EC2 instance being deployed. These environment variables are as follows:
 
 * `KEYPAIR_NAME`: the name of the AWS keypair that will be used to log in to the instance. This keypair should already exist within your AWS account and its private key file should reside on the local system.
