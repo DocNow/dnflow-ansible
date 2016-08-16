@@ -3,14 +3,18 @@ Ansible playbooks for setting up dnflow
 
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
 
-## Introduction
+## Purpose
+
+The goal of this repository is to have a lightweight method of developing and reproducing the [docnow/dnflow](https://github.com/docnow/dnflow) tool. With the use of freely available tools a user can set up a disposable environment on their personal computer or on the AWS cloud.
+
+### Install prerequisite tools 
 
 These scripts are intended to be run on a Unix-like system. They are tested to work on Mac OSX and Ubuntu Trusty Tahr
 
 To use these scripts, [Vagrant](https://vagrantup.com) must already have been installed on the local system with the [VirtualBox](https://virtualbox.org) provider working. For provisioning to AWS, the `aws` provider must also be installed. This can be done by executing the following command, which will install the aws Vagrant provider plugin: 
 
 ```bash
-vagrant plugin install vagrant-aws
+$ vagrant plugin install vagrant-aws
 ```
 
 For each of these providers only Ubuntu 14.04 is supported. We will also provide Docker as an additional provider.
@@ -38,7 +42,7 @@ Before deploying the environment you must make a few changes. Specifically you w
 cp group_vars/all.template group_vars/all
 ```
 
-For all environments, we have an `Vagrantfile` which will work. In order for this to work make sure your environment contains the following AWS variables:
+For all environments, we have an `Vagrantfile` which will work. In order for this to work on AWS make sure your environment contains the following AWS variables:
 
 ```bash
 export AWS_KEY='your-key'
