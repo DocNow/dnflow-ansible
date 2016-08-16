@@ -1,4 +1,4 @@
 ---
-hostname: 192.168.60.14
+hostname: "{{ ansible_nodename }}"
 twitter_consumer_key: your_key
 twitter_consumer_secret: your_secret 
