@@ -36,7 +36,7 @@ cd dnflow-ansible
 
 ## Initial Configuration
 
-Before deploying the environment you must make a few changes. Specifically you will need to register an application at [apps.twitter.com](https://apps.twitter.com). Once you've created your application, note down the consumer key, consumer secret. With these two variables in hand you can modify the `group_vars/all.template` and then copy it into place:
+Before deploying the environment you must make a few changes. Specifically you will need to register an application at [apps.twitter.com](https://apps.twitter.com). Once you've created your application, note down the **consumer key, consumer secret**. It is also important to remember to fill out the _Callback URL_ otherwise the application will not work. You can use `http://example.org`.  With these two variables in hand you can modify the `group_vars/all.template` and then copy it into place:
 
 ```bash
 cp group_vars/all.template group_vars/all
