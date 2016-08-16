@@ -82,6 +82,7 @@ When using the `aws` provider to `vagrant up` it is necessary to define several 
 Current maintainers:
 
 * [Francis Kayiwa](https://github.com/kayiwa)
+* [Ed Summers](https://github.com/edsu)
 
 ## License
 
