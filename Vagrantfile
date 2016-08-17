@@ -52,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provider.keypair_name = settings['keypair_name']
     provider.ami = settings['ami']
     provider.region = settings['region']
-    override.vm.box = "dummy"
+    override.vm.box = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
     override.ssh.username = settings["ssh_username"]
     override.ssh.private_key_path = settings['private_key_path']
   end
