@@ -14,6 +14,15 @@ def load_settings(file)
   YAML.load_file "#{dir}/provider/#{file}.yml"
 end
 
+### map the ports
+def map_ports(override, settings)
+  if (settings.include?('port_mapping'))
+    for port_mapping in settings['port_mapping'];
+      override.vm.network "forwarded_port", guest: port_mapping['guest'], host: port_mapping['host']
+    end
+  end
+end
+
 ### install required plugins
 unless Vagrant.has_plugin?("vagrant-triggers") and Vagrant.has_plugin?("vagrant-aws")
 
