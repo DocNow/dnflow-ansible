@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provider.cpus = settings['cpus']
     provider.memory = settings['memory']
     override.vm.box = settings['box']
-    override.vm.network "public_network", bridge: "en1: Wi-Fi (Airport)"
+    override.vm.network :private_network, ip: "192.168.60.14"
  end
 
 ### AWS provider
