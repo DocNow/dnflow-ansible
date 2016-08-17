@@ -1,0 +1,10 @@
+---
+# Documentation: https://github.com/mitchellh/vagrant-aws
+access_key_id: AWSEXAMPLEACCESSKEY
+secret_access_key: AWSGENERATEDMAGICSECRETKEY
+keypair_name: default
+ami: ami-4feaad2a
+instance_type: m3.medium
+private_key_path: /path/to/awsloginkey
+region: us-east-1
+ssh_username: ubuntu

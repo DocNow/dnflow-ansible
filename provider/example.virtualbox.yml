@@ -1,0 +1,12 @@
+---
+name: docnow dnflow
+box: ubuntu/trusty64
+memory: 2048
+cpus: 1
+port_mapping:
+  # nginx
+  - guest: 80
+    host: 8000
+  # luigid
+  - guest: 8082
+    host: 8082
