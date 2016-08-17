@@ -3,3 +3,5 @@ name: docnow dnflow
 box: ubuntu/trusty64
 memory: 2048
 cpus: 1
+private_network:
+  - ip : 192.168.60.14
