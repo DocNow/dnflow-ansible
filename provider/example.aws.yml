@@ -8,3 +8,4 @@ instance_type: m3.medium
 private_key_path: /path/to/awsloginkey
 region: us-east-1
 ssh_username: ubuntu
+monitoring: true
