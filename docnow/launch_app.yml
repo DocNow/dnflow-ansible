@@ -18,6 +18,7 @@
     copy: src=./docnow/files/luigid.sh dest=/vagrant/luigid.sh mode="a+x"
 
   - name: launch luigid
+    become_user: docnow
     command: "nohup /vagrant/luigid.sh"
     args:
       chdir: /vagrant
@@ -26,6 +27,7 @@
     copy: src=./docnow/files/rqworker.sh dest=/vagrant/rqworker.sh mode="a+x" 
 
   - name: start the rq worker
+    become_user: docnow
     command: "nohup /vagrant/rqworker.sh" 
     args:
       chdir: /vagrant
