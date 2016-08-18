@@ -1,6 +1,6 @@
 #!/bin/bash
 
 source /opt/docnow/bin/activate
-cd /vagrant/dnflow/
+cd /home/docnow/dnflow/
 
 rq worker &
