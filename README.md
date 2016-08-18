@@ -11,13 +11,9 @@ The goal of this repository is to have a lightweight method of developing and re
 
 These scripts are intended to be run on a Unix-like system. They are tested to work on Mac OSX and Ubuntu Trusty Tahr
 
-To use these scripts, [Vagrant](https://vagrantup.com) must already have been installed on the local system with the [VirtualBox](https://virtualbox.org) provider working. For provisioning to AWS, the `aws` provider must also be installed. This can be done by executing the following command, which will install the aws Vagrant provider plugin: 
+To use these scripts, [Vagrant](https://vagrantup.com) must already have been installed on the local system with the [VirtualBox](https://virtualbox.org) provider working. For provisioning to AWS, the `aws` will be installed. 
 
-```bash
-$ vagrant plugin install vagrant-aws
-```
-
-For each of these providers only Ubuntu 14.04 is supported. We will also provide Docker as an additional provider.
+For each of these providers only Ubuntu 14.04 is supported. 
 
 ## Includes
 
@@ -42,14 +38,8 @@ Before deploying the environment you must make a few changes. Specifically you w
 cp group_vars/all.template group_vars/all
 ```
 
-For all environments, we have an `Vagrantfile` which will work. In order for this to work on AWS make sure your environment contains the following AWS variables:
+For all environments, we have a `Vagrantfile` which will work. We have provided example provider files for Virtualbox and AWS
 
-```bash
-export AWS_KEY='your-key'
-export AWS_SECRET='your-secret'
-export AWS_KEYNAME='your-keyname'
-export AWS_KEYPATH='your-keypath'
-```
 
 Boxes take approximately _10 mins_ to come up, and it can take much longer locally depending on your internet connection.
 
@@ -59,25 +49,55 @@ Boxes take approximately _10 mins_ to come up, and it can take much longer local
 $ vagrant up
 ```
 
-### Provider AWS
+On the first run it will install the `vagrant-triggers` plugin. In addition it will make a copy of `provider/example.virtualbox.yml` Take a look at the contents of that file and if you need to make adjustments do so before running
 
-Make sure you have the `vagrant-aws` plugin installed. You can check this by running the following command:
 
 ```bash
-$ vagrant plugin install vagrant-aws
+$ vagrant up
 ```
-This will install the plugin needed to deploy to AWS with the following command:
+
+again.
+
+### Provider AWS
+
 
 ```bash
 $ vagrant up --provider aws
 ```
-
-When using the `aws` provider to `vagrant up` it is necessary to define several environment variables in order to authenticate to AWS and supply a keypair with which Vagrant can log in to the new AWS EC2 instance being deployed. These environment variables are as follows:
+On the first run it will install the `vagrant-triggers` and `vagrant-aws` plugins. In addition it will make a copy of `provider/example.aws.yml` Take a look at the contents of the `provider/aws.yml` and enter the AWS account information needed. You must enter the following.
 
 * `KEYPAIR_NAME`: the name of the AWS keypair that will be used to log in to the instance. This keypair should already exist within your AWS account and its private key file should reside on the local system.
 * `KEYPAIR_FILE`: the pathname of the private key on the local system corresponding to the aforementioned keypair.
 * `AWS_ACCESS_KEY`: the AWS IAM access key to the account under which the EC2 instance will be created.
 * `AWS_SECRET_KEY`: the AWS IAM secret key to the account under which the EC2 instance will be created.
+
+
+## After installation
+
+### Provider: Virtualbox
+
+Go to http://192.168.60.14
+
+### Provider: AWS
+
+Go to your AWS Console
+
+* Select your running instance
+* Click on the **connect** information to log into it.
+
+You will need the AWS provided public dns name (make a note of this) This information will be needed to be replaced in the following files
+
+`/home/docnow/dnflow/dnflow.cfg` HOSTNAME 
+`/etc/nginx/sites-enabled/docnow` servername
+
+The run the following command
+
+```bash
+sudo stop docnow
+sudo start docnow
+```
+
+The point your URL to the AWS location above
 
 Current maintainers:
 
