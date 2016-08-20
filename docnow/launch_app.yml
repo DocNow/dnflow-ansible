@@ -29,8 +29,12 @@
   - name: copy upstart script
     copy: src=./docnow/templates/docnow.conf dest=/etc/init/docnow.conf
 
+  - stat: path=/home/docnow/dnflow/db.sqlite3
+    register: db_exists
+
   - name: db to track searches
     shell: sqlite3 db.sqlite3 < schema.sql
+    when: db_exists == False
     args:
       chdir: /home/docnow/dnflow
 
