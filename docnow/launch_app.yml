@@ -3,16 +3,7 @@
     file: path=/var/log/uwsgi state=directory owner=docnow group=www-data
 
   - name: create configuration file
-    copy: remote_src=True src=/home/docnow/dnflow/dnflow.cfg.template dest=/home/docnow/dnflow/dnflow.cfg
-
-  - name: add twitter consumer key
-    replace: dest=/home/docnow/dnflow/dnflow.cfg regexp='YOUR_TWITTER_CONSUMER_KEY_HERE' replace={{ twitter_consumer_key }}
-
-  - name: add twitter consumer secret
-    replace: dest=/home/docnow/dnflow/dnflow.cfg regexp='YOUR_TWITTER_CONSUMER_SECRET_HERE' replace={{ twitter_consumer_secret }}
-
-  - name: add hostname 
-    replace: dest=/home/docnow/dnflow/dnflow.cfg regexp="HOSTNAME = 'localhost'" replace="HOSTNAME = '{{ hostname }}'"
+    template: src=docnow/templates/dnflow.cfg.j2 dest=/home/docnow/dnflow/dnflow.cfg
 
   - name: copy luigid daemonize script
     copy: src=./docnow/files/luigid.sh dest=/home/docnow/luigid.sh mode="a+x"
