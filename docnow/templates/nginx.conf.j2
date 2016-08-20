@@ -5,9 +5,17 @@ server {
   location / {
     include uwsgi_params;
     uwsgi_pass 127.0.0.1:8001;
+    {% if http_basicauth_user %}
+    auth_basic "Speak, Friend and Enter";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+    {% endif %}
   }
   location /static {
     alias /home/docnow/dnflow/static;
+    {% if http_basicauth_user %}
+    auth_basic "Speak, Friend and Enter";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+    {% endif %}
   }
 }
 
@@ -16,6 +24,9 @@ server {
   listen [::]:8080 default_server ipv6only=on;
   location / {
     proxy_pass http://localhost:8082;
+    {% if http_basicauth_user %}
+    auth_basic "Speak, Friend and Enter";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+    {% endif %}
   }
 }
-
