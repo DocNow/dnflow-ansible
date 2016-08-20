@@ -1,6 +1,6 @@
 ---
   - name: clone dnflow repository
-    git: repo=https://github.com/DocNow/dnflow.git dest=/home/docnow/dnflow
+    git: repo=https://github.com/DocNow/dnflow.git dest=/home/docnow/dnflow update=yes
   
   - name: install  virtualenv
     pip: name=virtualenv

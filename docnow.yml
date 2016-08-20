@@ -6,6 +6,8 @@
   pre_tasks:
     - name: update apt_cache
       apt: update_cache=yes cache_valid_time=6000
+    - name: upgrade
+      apt: upgrade=safe
 
   tasks:
     - include: docnow/python_build.yml
