@@ -88,6 +88,7 @@ Go to your AWS Console
 You will need the AWS provided public dns name (make a note of this) This information will be needed to be replaced in the following files
 
 `/home/docnow/dnflow/dnflow.cfg` HOSTNAME 
+
 `/etc/nginx/sites-enabled/docnow` servername
 
 The run the following command
@@ -97,7 +98,7 @@ sudo stop docnow
 sudo start docnow
 ```
 
-The point your URL to the AWS location above
+Then point your URL to the AWS location above
 
 Current maintainers:
 
