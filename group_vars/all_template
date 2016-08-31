@@ -1,4 +1,5 @@
 ---
+# Depending on your setup you may want to change this from eth0 to eth1 especially on Virtualbox
 hostname: "{{ ansible_eth0.ipv4.address }}"
 twitter_consumer_key: your_key
 twitter_consumer_secret: your_secret 
