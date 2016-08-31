@@ -90,7 +90,17 @@ On the first run it will install the `vagrant-triggers` and `vagrant-aws` plugin
 
 ### Provider: Virtualbox
 
+Log into your VM and complete with the following steps
+
+
+```
+vagrant ssh
+cd /home/docnow/dnflow
+sudo -u docnow -s ; sqlite3 db.sqlite3 < schema.sql
+```
+
 Go to http://192.168.60.14
+
 
 ### Provider: AWS
 
