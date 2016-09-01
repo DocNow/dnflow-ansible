@@ -11,6 +11,10 @@ REDIS_DB = 4
 TWITTER_CONSUMER_KEY = '{{ twitter_consumer_key }}'
 TWITTER_CONSUMER_SECRET = '{{ twitter_consumer_secret }}'
 
+{% if google_analytics %}
+GOOGLE_ANALYTICS = '{{ google_analytics }}'
+{% endif %}
+
 {% if http_basicauth_user %}
 HTTP_BASICAUTH_USER = '{{ http_basicauth_user }}'
 HTTP_BASICAUTH_PASS = '{{ http_basicauth_pass }}'
