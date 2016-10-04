@@ -8,20 +8,8 @@
   - name: copy luigid daemonize script
     copy: src=./docnow/files/luigid.sh dest=/home/docnow/luigid.sh mode="a+x"
 
-  - name: launch luigid
-    become_user: docnow
-    command: "nohup /home/docnow/luigid.sh"
-    args:
-      chdir: /home/docnow
-
   - name: copy rq startup script
     copy: src=./docnow/files/rqworker.sh dest=/home/docnow/rqworker.sh mode="a+x" 
-
-  - name: start the rq worker
-    become_user: docnow
-    command: "nohup /home/docnow/rqworker.sh" 
-    args:
-      chdir: /home/docnow
 
   - name: copy application ini file
     copy: src=./docnow/files/docnow.ini dest=/home/docnow/dnflow/docnow.ini owner=docnow group=docnow
@@ -30,16 +18,29 @@
     copy: src=./docnow/templates/docnow.conf dest=/etc/init/docnow.conf
 
   - stat: path=/home/docnow/dnflow/db.sqlite3
-    register: db_exists
+    register: db
 
   - name: db to track searches
+    become_user: docnow
     shell: sqlite3 db.sqlite3 < schema.sql
-    when: db_exists == False
+    when: db.stat.exists == False
     args:
       chdir: /home/docnow/dnflow
 
   - name: grant ownership to docnow user
     file: path=/home/docnow/dnflow state=directory owner=docnow group=docnow recurse=yes
+
+  - name: launch luigid
+    become_user: docnow
+    command: "nohup /home/docnow/luigid.sh"
+    args:
+      chdir: /home/docnow
+
+  - name: start the rq worker
+    become_user: docnow
+    command: "nohup /home/docnow/rqworker.sh" 
+    args:
+      chdir: /home/docnow
 
   - name: start application
     service: name=docnow state=started
