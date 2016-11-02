@@ -1,7 +1,11 @@
 ---
+# Depending on your setup you may want to change this from eth0 to eth1 
+# especially on Virtualbox
 hostname: "{{ ansible_eth0.ipv4.address }}"
 twitter_consumer_key: your_key
 twitter_consumer_secret: your_secret 
+# If you are using this on Virtualbox you likely don't need these please look
+# at the dnflow.cfg2 and nginx for more edits for Virtualbox
 #http_basicauth_user: username
 #http_basicauth_pass: password
 #google_analytics: blah

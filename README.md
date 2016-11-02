@@ -45,6 +45,19 @@ Boxes take approximately _10 mins_ to come up, and it can take much longer local
 
 ### Provider: Virtualbox
 
+#### Additional modifications
+
+Take a look at the newly created `group_vars/all` file. You likely will not need the basic auth and can safely delete the last two lines. 
+
+In addition the line blocks that begin with 
+
+```
+{% if http_basicauth_user %}
+```
+
+referring to http authentication in `docnow/templates/dnflow.cfg.j2` and ``docnow/templates/dnflow.cfg.j2` can be safely deleted. 
+
+
 ```bash
 $ vagrant up
 ```
@@ -57,6 +70,7 @@ $ vagrant up
 ```
 
 again.
+
 
 ### Provider AWS
 
@@ -76,7 +90,17 @@ On the first run it will install the `vagrant-triggers` and `vagrant-aws` plugin
 
 ### Provider: Virtualbox
 
+Log into your VM and complete with the following steps
+
+
+```
+vagrant ssh
+cd /home/docnow/dnflow
+sudo -u docnow -s ; sqlite3 db.sqlite3 < schema.sql
+```
+
 Go to http://192.168.60.14
+
 
 ### Provider: AWS
 
