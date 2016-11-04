@@ -85,7 +85,7 @@ Go to your AWS Console
 * Select your running instance
 * Click on the **connect** information to log into it.
 
-You will need the AWS provided IP address (make a note of this). It will be listed in the EC2 table under "Public IP". This information will be needed to be replaced in the following files
+You will need the AWS provided IP address (make a note of this). It will be listed in the EC2 table under "Public IP". This information will be needed to be replaced in the following files. Note that you will have to use `sudo` to make edits to these read-only files.
 
 `/home/docnow/dnflow/dnflow.cfg` HOSTNAME 
 

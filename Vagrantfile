@@ -57,7 +57,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provider.access_key_id = settings['access_key_id']
     provider.secret_access_key = settings['secret_access_key']
     provider.keypair_name = settings['keypair_name']
-    provider.security_groups = settings['security group']
     provider.ami = settings['ami']
     provider.region = settings['region']
     provider.monitoring = settings['monitoring']
