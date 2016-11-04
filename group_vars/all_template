@@ -4,3 +4,4 @@ twitter_consumer_key: your_key
 twitter_consumer_secret: your_secret 
 http_basicauth_user:
 http_basicauth_pass:
+google_analytics:
