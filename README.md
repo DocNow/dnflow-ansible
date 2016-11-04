@@ -64,14 +64,13 @@ $ vagrant up --provider aws
 
 On the first run it will install the `vagrant-triggers` and `vagrant-aws` plugins. In addition it will make a copy of `provider/example.aws.yml` Take a look at the contents of the `provider/aws.yml` and enter the AWS account information needed. You must enter the following.
 
-* `keypair_name`: the name of the AWS keypair that will be used to log in to the instance. This keypair should already exist within your AWS account and its private key file should reside on the local system.
-* `ami`: The ami from the EC2 dashboard of your region.
-* `security_group`: The name of the security_group from AWS.
-* `region`: For convenience, you may want to set the same region as the one your machine is running in (i.e. `us-west-2`).
+* `keypair_name`: the name of the AWS keypair that will be used to log in to the instance (these are `.pem` files).
+* `region`: For convenience, you may want to set the same region as the one your other machines are using (i.e. `us-west-2`).
 * `private_key_path`: the pathname of the private key on the local system corresponding to the aforementioned keypair.
 * `access_key_id`: the AWS IAM access key to the account under which the EC2 instance will be created.
 * `secret_access_key`: the AWS IAM secret key to the account under which the EC2 instance will be created.
 
+If the install hangs on `Waiting for SSH to become available..`, you may need to edit the securiy group on your EC2 instance. You can do so by right-clicking on the instance, selecting "Networking," and "Change Security Groups." For your new security group, make sure you allow Inbound HTTP (port 80) and SSH (port 22) traffic.  
 
 ## After installation
 
@@ -86,7 +85,7 @@ Go to your AWS Console
 * Select your running instance
 * Click on the **connect** information to log into it.
 
-You will need the AWS provided public dns name (make a note of this) This information will be needed to be replaced in the following files
+You will need the AWS provided IP address (make a note of this). It will be listed in the EC2 table under "Public IP". This information will be needed to be replaced in the following files
 
 `/home/docnow/dnflow/dnflow.cfg` HOSTNAME 
 
@@ -99,7 +98,7 @@ sudo stop docnow
 sudo start docnow
 ```
 
-Then point your URL to the AWS location above
+Then point your URL to the IP address provided above.
 
 Current maintainers:
 
