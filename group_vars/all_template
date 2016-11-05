@@ -1,7 +1,7 @@
 ---
-hostname: "{{ ansible_eth0.ipv4.address }}"
+hostname: "{{ ansible_default_ipv4.address }}"
 twitter_consumer_key: your_key
 twitter_consumer_secret: your_secret 
-#http_basicauth_user: username
-#http_basicauth_pass: password
-#google_analytics: blah
+http_basicauth_user:
+http_basicauth_pass:
+google_analytics:
