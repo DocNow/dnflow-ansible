@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI server instance configured to serve docnow
+
+[Service]
+Environment= PATH=/opt/docnow/bin
+WorkingDirectory=/home/docnow/dnflow
+ExecStart=/opt/docnow/bin/uwsgi --ini docnow.ini
+Restart=always
+User=docnow
+Group=www-data
+
+[Install]
+WantedBy=multi-user.target

@@ -14,8 +14,8 @@
   - name: copy application ini file
     copy: src=./docnow/files/docnow.ini dest=/home/docnow/dnflow/docnow.ini owner=docnow group=docnow
 
-  - name: copy upstart script
-    copy: src=./docnow/templates/docnow.conf dest=/etc/init/docnow.conf
+  - name: copy systemd config
+    copy: src=./docnow/templates/docnow.service dest=/etc/systemd/system/docnow.service
 
   - stat: path=/home/docnow/dnflow/db.sqlite3
     register: db
@@ -43,7 +43,7 @@
       chdir: /home/docnow
 
   - name: start application
-    service: name=docnow state=started
+    systemd: name=system.docnow state=started enabled=yes
 
   - name: restart webserver
     service: name=nginx state=restarted
