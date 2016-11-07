@@ -3,3 +3,4 @@
 group_vars/all
 provider/*
 provider/!example*
+*.retry
