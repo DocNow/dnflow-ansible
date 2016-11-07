@@ -5,8 +5,8 @@
   gather_facts: no
 
   pre_tasks:
-    - name: install python 2
-      raw: sudo apt-get -y install python-simplejson
+    - name: ansible needs python2 and aptitude
+      raw: sudo apt-get -y install python-simplejson aptitude
     - name: update apt_cache
       apt: update_cache=yes cache_valid_time=6000
     - name: upgrade
