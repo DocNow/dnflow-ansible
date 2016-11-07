@@ -15,7 +15,7 @@
     copy: src=./docnow/files/docnow.ini dest=/home/docnow/dnflow/docnow.ini owner=docnow group=docnow
 
   - name: copy systemd config
-    copy: src=./docnow/templates/docnow.service dest=/etc/systemd/system/docnow.service
+    copy: src=./docnow/templates/docnow.service dest=/lib/systemd/system/docnow.service
 
   - stat: path=/home/docnow/dnflow/db.sqlite3
     register: db
