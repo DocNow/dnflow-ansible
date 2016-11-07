@@ -43,7 +43,7 @@
       chdir: /home/docnow
 
   - name: start application
-    systemd: name=system.docnow state=started enabled=yes
+    systemd: name=docnow state=restarted enabled=yes
 
   - name: restart webserver
     service: name=nginx state=restarted
