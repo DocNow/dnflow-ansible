@@ -7,9 +7,7 @@
     - wget
     - apt-transport-https
     - gfortran
-    - libblas3gf
     - libblas-dev
-    - liblapack3gf
     - liblapack-dev
     - libatlas-base-dev
     - libxml2-dev

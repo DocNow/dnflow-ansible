@@ -9,7 +9,8 @@ The goal of this repository is to have a lightweight method of developing and re
 
 ### Install prerequisite tools 
 
-These scripts are intended to be run on a Unix-like system. They are tested to work on Mac OSX and Ubuntu Trusty Tahr.
+These scripts are intended to be run on a Unix-like system. They are tested to
+work on Mac OSX and Ubuntu Xenial Xerus.
 
 To use these scripts, [Vagrant](https://vagrantup.com) must already have been installed on the local system with the [VirtualBox](https://virtualbox.org) provider working (do not use a package manager, follow the instructions on the sites directly). For provisioning to AWS, the `aws` will be installed. 
 

@@ -1,6 +1,6 @@
 ---
 name: docnow dnflow
-box: ubuntu/trusty64
+box: ubuntu/xenial64
 memory: 2048
 cpus: 1
 private_network:
