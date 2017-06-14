@@ -1,5 +1,5 @@
 ---
-- hosts: dnflow-test
+- hosts: docnow-prod
   become: yes
   become_method: sudo
   gather_facts: no
