@@ -1,8 +1,8 @@
 ---
-- hosts: docnow-prod
-  become: yes
+- hosts: all
+  become: 'yes'
   become_method: sudo
-  gather_facts: no
+  gather_facts: 'no'
 
   pre_tasks:
     - name: ansible needs python2 and aptitude
