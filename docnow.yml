@@ -12,11 +12,11 @@
     - name: upgrade
       apt: upgrade=safe
 
-  tasks:
-    - include: docnow/python_build.yml
-    - include: docnow/other_software.yml
-    - include: docnow/user_setup.yml
-    - include: docnow/virtenv_setup.yml
-    - include: docnow/redis_software.yml
-    - include: docnow/nginx_software.yml
-    - include: docnow/launch_app.yml
+  import_tasks:
+    - docnow/python_build.yml
+    - docnow/other_software.yml
+    - docnow/user_setup.yml
+    - docnow/virtenv_setup.yml
+    - docnow/redis_software.yml
+    - docnow/nginx_software.yml
+    - docnow/launch_app.yml
