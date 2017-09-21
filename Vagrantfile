@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :ansible_local do |ansible|
     ansible.playbook = "docnow.yml"
-    ansible.sudo = true
+    ansible.become = true
     ansible.verbose = ""
   end
 
